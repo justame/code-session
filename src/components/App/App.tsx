@@ -42,9 +42,9 @@ class App extends React.Component<AppProps> {
               activeId={activeId}
               onClick={(value) => this.setActiveId(value.id)}
               items={[
-                { id: 1, title: 'Users' },
+                { id: 1, title: 'All' },
                 { id: 2, title: 'Admins' },
-                { id: 3, title: 'Only Users Sorted By Age' },
+                { id: 3, title: 'Regular Users Sorted By Age' },
                 { id: 4, title: 'Users And Admins With Image' },
               ]}
             />
