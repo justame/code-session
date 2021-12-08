@@ -7,11 +7,7 @@ import * as userService from '../../services/userService';
 
 interface AppProps extends WithTranslation {}
 
-// Task : change to display young users (below 30s)
-
-// what we learn ?
-// single source of truth
-// function should say what is  say and one thing
+// Task : Users And Admins With Image tab doesn't show images - fix it
 
 class App extends React.Component<AppProps> {
   state = {
@@ -32,6 +28,9 @@ class App extends React.Component<AppProps> {
     } else if (activeId === 3) {
       includeAdmins = false;
       shouldSortByAge = true;
+    } else if (activeId === 4) {
+      includeAdmins = true;
+      shouldSortByAge = true;
     }
 
     return (
@@ -46,7 +45,7 @@ class App extends React.Component<AppProps> {
                 { id: 1, title: 'Users' },
                 { id: 2, title: 'Users And Admins' },
                 { id: 3, title: 'Only Users Sorted By Age' },
-                { id: 4, title: 'Premium Only' },
+                { id: 4, title: 'Users And Admins With Image' },
               ]}
             />
           </div>

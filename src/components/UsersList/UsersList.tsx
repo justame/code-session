@@ -5,15 +5,17 @@ const UserItem = (props: any) => {
   const user: User = props.user;
   return (
     <div style={{ border: '1px solid #CCC', display: 'flex' }}>
-      <div style={{ marginRight: 20 }}>
-        <img
-          style={{ borderRadius: '50%' }}
-          width="60"
-          height="60"
-          alt="user"
-          src={user.userThumbnail}
-        />
-      </div>
+      {user.userThumbnail && (
+        <div style={{ marginRight: 20 }}>
+          <img
+            style={{ borderRadius: '50%' }}
+            width="60"
+            height="60"
+            alt="user"
+            src={user.userThumbnail}
+          />
+        </div>
+      )}
       <div>
         <div>name : {user.name}</div>
         <div>age : {user.age}</div>

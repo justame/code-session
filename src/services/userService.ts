@@ -48,6 +48,10 @@ const users: User[] = [
   },
 ];
 
+// const getUserImage = (user) => {
+//   return `https://avatars.githubusercontent.com/u/${user.id}?v=4`;
+// };
+
 export const getAllUsers = (
   includeAdmins = false,
   shouldSortByAge = false,
@@ -57,12 +61,6 @@ export const getAllUsers = (
     return includeAdmins || !user.isAdmin;
   });
 
-  allUsers = allUsers.map((user) => {
-    return {
-      ...user,
-      userThumbnail: `https://avatars.githubusercontent.com/u/${user.id}?v=4`,
-    };
-  });
   if (shouldSortByAge) {
     allUsers = allUsers.sort((a, b) => (a.age < b.age ? -1 : 1));
   }
