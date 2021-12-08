@@ -23,8 +23,16 @@ class App extends React.Component<AppProps> {
   }
   render() {
     const { activeId } = this.state;
-    const includeAdmins = activeId === 2;
-    const shouldSortByAge = activeId === 3;
+    let includeAdmins, shouldSortByAge;
+    if (activeId === 1) {
+      includeAdmins = false;
+    }
+    if (activeId === 2) {
+      includeAdmins = true;
+    } else if (activeId === 3) {
+      includeAdmins = false;
+      shouldSortByAge = true;
+    }
 
     return (
       <Page height="100vh">
@@ -35,9 +43,10 @@ class App extends React.Component<AppProps> {
               activeId={activeId}
               onClick={(value) => this.setActiveId(value.id)}
               items={[
-                { id: 1, title: 'Default' },
-                { id: 2, title: 'User And Admins' },
+                { id: 1, title: 'Users' },
+                { id: 2, title: 'Users And Admins' },
                 { id: 3, title: 'Only Users Sorted By Age' },
+                { id: 4, title: 'Premium Only' },
               ]}
             />
           </div>
