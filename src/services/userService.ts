@@ -9,7 +9,7 @@ export type User = {
   isPremium: boolean;
 };
 
-const users: User[] = [
+const usersList: User[] = [
   {
     name: 'Tamrat',
     age: 36,
@@ -48,22 +48,35 @@ const users: User[] = [
   },
 ];
 
-// const getUserImage = (user) => {
-//   return `https://avatars.githubusercontent.com/u/${user.id}?v=4`;
-// };
+const getUserImage = (user) => {
+  return `https://avatars.githubusercontent.com/u/${user.id}?v=4`;
+};
 
-export const getAllUsers = (
-  forceAdminsOnly = false,
-  shouldSortByAge = false,
-): User[] => {
-  let allUsers = users;
-  if (forceAdminsOnly) {
-    allUsers = users.filter((user) => {
-      return user.isAdmin;
-    });
-  }
-  if (shouldSortByAge) {
-    allUsers = allUsers.sort((a, b) => (a.age < b.age ? -1 : 1));
-  }
-  return allUsers;
+export const getAllUsers = (): User[] => {
+  return usersList;
+};
+
+export const getAllAdmins = (): User[] => {
+  return getAllUsers().filter((user) => {
+    return user.isAdmin;
+  });
+};
+
+export const getAllRegularUsers = () => {
+  return getAllUsers().filter((user) => {
+    return !user.isAdmin;
+  });
+};
+
+export const sortUsersByAge = (users: User[]) => {
+  return users.sort((userA, userB) => {
+    return userA.age > userB.age ? -1 : 1;
+  });
+};
+
+export const addThumbnail = (user) => {
+  return {
+    ...user,
+    userThumbnail: getUserImage(user),
+  };
 };

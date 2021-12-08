@@ -9,6 +9,12 @@ interface AppProps extends WithTranslation {}
 
 // Task : Users And Admins With Image tab doesn't show images - fix it
 
+const TABS_IDS = {
+  ALL: 1,
+  ADMINS: 2,
+  REGULAR_USERS: 3,
+  USERS_ADMINS_WITH_IMAGE: 4,
+};
 class App extends React.Component<AppProps> {
   state = {
     activeId: 1,
@@ -17,21 +23,33 @@ class App extends React.Component<AppProps> {
   setActiveId(activeId) {
     this.setState({ activeId });
   }
-  render() {
+
+  getUsersByTab() {
     const { activeId } = this.state;
-    let forceAdminsOnly, shouldSortByAge;
-    if (activeId === 1) {
-      forceAdminsOnly = false;
+    let users = [];
+    switch (activeId) {
+      case TABS_IDS.ALL:
+        users = userService.getAllUsers();
+        break;
+      case TABS_IDS.ADMINS:
+        users = userService.getAllAdmins();
+        break;
+      case TABS_IDS.REGULAR_USERS:
+        users = userService.sortUsersByAge(userService.getAllRegularUsers());
+        break;
+      case TABS_IDS.USERS_ADMINS_WITH_IMAGE: {
+        users = userService
+          // userService.sortUsersByAge
+          .getAllUsers()
+          .map((user) => userService.addThumbnail(user));
+      }
     }
-    if (activeId === 2) {
-      forceAdminsOnly = true;
-    } else if (activeId === 3) {
-      forceAdminsOnly = false;
-      shouldSortByAge = true;
-    } else if (activeId === 4) {
-      forceAdminsOnly = false;
-      shouldSortByAge = true;
-    }
+
+    return users;
+  }
+  render() {
+    const users = this.getUsersByTab();
+    const { activeId } = this.state;
 
     return (
       <Page height="100vh">
@@ -42,16 +60,14 @@ class App extends React.Component<AppProps> {
               activeId={activeId}
               onClick={(value) => this.setActiveId(value.id)}
               items={[
-                { id: 1, title: 'Users' },
+                { id: 1, title: 'All' },
                 { id: 2, title: 'Admins' },
-                { id: 3, title: 'Only Users Sorted By Age' },
+                { id: 3, title: 'Regular Users Sorted By Age' },
                 { id: 4, title: 'Users And Admins With Image' },
               ]}
             />
           </div>
-          <UsersList
-            users={userService.getAllUsers(forceAdminsOnly, shouldSortByAge)}
-          />
+          <UsersList users={users} />
         </Page.Content>
       </Page>
     );
