@@ -53,14 +53,15 @@ const users: User[] = [
 // };
 
 export const getAllUsers = (
-  includeAdmins = false,
+  forceAdminsOnly = false,
   shouldSortByAge = false,
 ): User[] => {
   let allUsers = users;
-  allUsers = users.filter((user) => {
-    return includeAdmins || !user.isAdmin;
-  });
-
+  if (forceAdminsOnly) {
+    allUsers = users.filter((user) => {
+      return user.isAdmin;
+    });
+  }
   if (shouldSortByAge) {
     allUsers = allUsers.sort((a, b) => (a.age < b.age ? -1 : 1));
   }

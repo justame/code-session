@@ -19,17 +19,17 @@ class App extends React.Component<AppProps> {
   }
   render() {
     const { activeId } = this.state;
-    let includeAdmins, shouldSortByAge;
+    let forceAdminsOnly, shouldSortByAge;
     if (activeId === 1) {
-      includeAdmins = false;
+      forceAdminsOnly = false;
     }
     if (activeId === 2) {
-      includeAdmins = true;
+      forceAdminsOnly = true;
     } else if (activeId === 3) {
-      includeAdmins = false;
+      forceAdminsOnly = false;
       shouldSortByAge = true;
     } else if (activeId === 4) {
-      includeAdmins = true;
+      forceAdminsOnly = false;
       shouldSortByAge = true;
     }
 
@@ -43,14 +43,14 @@ class App extends React.Component<AppProps> {
               onClick={(value) => this.setActiveId(value.id)}
               items={[
                 { id: 1, title: 'Users' },
-                { id: 2, title: 'Users And Admins' },
+                { id: 2, title: 'Admins' },
                 { id: 3, title: 'Only Users Sorted By Age' },
                 { id: 4, title: 'Users And Admins With Image' },
               ]}
             />
           </div>
           <UsersList
-            users={userService.getAllUsers(includeAdmins, shouldSortByAge)}
+            users={userService.getAllUsers(forceAdminsOnly, shouldSortByAge)}
           />
         </Page.Content>
       </Page>
