@@ -17,9 +17,9 @@ fedopsLogger.appLoaded();
 
 ReactDOM.render(
   <Suspense fallback="...loading">
-    <I18nextProvider i18n={i18n}>
-      <App />
-    </I18nextProvider>
+    {/* <I18nextProvider i18n={i18n}> */}
+    <App />
+    {/* </I18nextProvider> */}
   </Suspense>,
   document.getElementById('root'),
 );

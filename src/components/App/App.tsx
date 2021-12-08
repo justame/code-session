@@ -1,19 +1,51 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Page, Tabs } from 'wix-style-react';
 import { withTranslation, WithTranslation } from '@wix/wix-i18n-config';
-import s from './App.scss';
+import UsersList from '../UsersList/UsersList';
+import './App.scss';
+import * as userService from '../../services/userService';
 
 interface AppProps extends WithTranslation {}
 
+// Task : change to display young users (below 30s)
+
+// what we learn ?
+// single source of truth
+// function should say what is  say and one thing
+
 class App extends React.Component<AppProps> {
+  state = {
+    activeId: 1,
+  };
+
+  setActiveId(activeId) {
+    this.setState({ activeId });
+  }
   render() {
-    const { t } = this.props;
+    const { activeId } = this.state;
+    const includeAdmins = activeId === 2;
+    const shouldSortByAge = activeId === 3;
 
     return (
-      <div className={s.root}>
-        <h2 className={s.title} data-hook="app-title">
-          {t('app.title', { who: 'Yoshi' })}
-        </h2>
-      </div>
+      <Page height="100vh">
+        <Page.Header title="WixTube" />
+        <Page.Content>
+          <div>
+            <Tabs
+              activeId={activeId}
+              onClick={(value) => this.setActiveId(value.id)}
+              items={[
+                { id: 1, title: 'Default' },
+                { id: 2, title: 'User And Admins' },
+                { id: 3, title: 'Only Users Sorted By Age' },
+              ]}
+            />
+          </div>
+          <UsersList
+            users={userService.getAllUsers(includeAdmins, shouldSortByAge)}
+          />
+        </Page.Content>
+      </Page>
     );
   }
 }
