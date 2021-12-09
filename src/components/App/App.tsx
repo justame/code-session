@@ -29,7 +29,7 @@ class App extends React.Component<AppProps> {
     let users = [];
     switch (activeId) {
       case TABS_IDS.ALL:
-        users = userService.getAllUsers();
+        users = userService.getUsers();
         break;
       case TABS_IDS.ADMINS:
         users = userService.getAllAdmins();
@@ -40,7 +40,7 @@ class App extends React.Component<AppProps> {
       case TABS_IDS.USERS_ADMINS_WITH_IMAGE: {
         users = userService
           // userService.sortUsersByAge
-          .getAllUsers()
+          .getUsers()
           .map((user) => userService.addThumbnail(user));
       }
     }

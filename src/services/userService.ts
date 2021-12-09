@@ -52,18 +52,18 @@ const getUserImage = (user) => {
   return `https://avatars.githubusercontent.com/u/${user.id}?v=4`;
 };
 
-export const getAllUsers = (): User[] => {
+export const getUsers = (): User[] => {
   return usersList;
 };
 
 export const getAllAdmins = (): User[] => {
-  return getAllUsers().filter((user) => {
+  return getUsers().filter((user) => {
     return user.isAdmin;
   });
 };
 
 export const getAllRegularUsers = () => {
-  return getAllUsers().filter((user) => {
+  return getUsers().filter((user) => {
     return !user.isAdmin;
   });
 };
