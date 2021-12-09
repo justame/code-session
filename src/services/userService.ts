@@ -52,7 +52,7 @@ const users: User[] = [
 //   return `https://avatars.githubusercontent.com/u/${user.id}?v=4`;
 // };
 
-export const getAllUsers = (
+export const getUsers = (
   forceAdminsOnly = false,
   shouldSortByAge = false,
 ): User[] => {

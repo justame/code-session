@@ -50,7 +50,7 @@ class App extends React.Component<AppProps> {
             />
           </div>
           <UsersList
-            users={userService.getAllUsers(forceAdminsOnly, shouldSortByAge)}
+            users={userService.getUsers(forceAdminsOnly, shouldSortByAge)}
           />
         </Page.Content>
       </Page>
