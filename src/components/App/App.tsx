@@ -53,7 +53,7 @@ class App extends React.Component<AppProps> {
 
     return (
       <Page height="100vh">
-        <Page.Header title="WixTube" />
+        <Page.Header title="Code Session 1" />
         <Page.Content>
           <div>
             <Tabs

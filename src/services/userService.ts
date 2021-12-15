@@ -69,8 +69,8 @@ export const getAllRegularUsers = () => {
 };
 
 export const sortUsersByAge = (users: User[]) => {
-  return users.sort((userA, userB) => {
-    return userA.age > userB.age ? -1 : 1;
+  return [...users].sort((userA, userB) => {
+    return userA.age > userB.age ? 1 : -1;
   });
 };
 
